@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BMA</string>
+    <string name="login_msg">Welcome Back</string>
+    <string name="login_text">Login to Your Account</string>
+    <string name="login_admin">Admin Login</string>
+    <string name="login_user">User Login</string>
+    <string name="admin_msg">Login to Admin Account</string>
+</resources>
