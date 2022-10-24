@@ -26,45 +26,9 @@ public class UserLogin extends AppCompatActivity {
         mUserLoginBinding = ActivityUserLoginBinding.inflate(getLayoutInflater());
         setContentView(mUserLoginBinding.getRoot());
 
-        //create text watcher for username input
-        mUserLoginBinding.usernameEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
-
-                mUser.setUsername(s.toString());
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        //create text watcher for password input
-        mUserLoginBinding.passwordEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
-
-                mUser.setPassword(s.toString());
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+        // set the TextChange Listener for both username & password
+        mUserLoginBinding.usernameEditText.addTextChangedListener(textWatcher);
+        mUserLoginBinding.passwordEditText.addTextChangedListener(textWatcher);
 
         //redirect to admin login page
         mUserLoginBinding.redirectAdminLogin.setOnClickListener(new View.OnClickListener() {
@@ -82,10 +46,33 @@ public class UserLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(UserLogin.this, Homepage.class);
+                Intent i = new Intent(UserLogin.this, ProductListActivity.class);
                 startActivity(i);
             }
         });
 
     }
+
+    //create text watcher for username & password input
+    public TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+
+            String username = mUserLoginBinding.usernameEditText.getText().toString();
+            String password = mUserLoginBinding.passwordEditText.getText().toString();
+
+            mUserLoginBinding.loginButton.setEnabled(!username.isEmpty() && !password.isEmpty());
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 }

@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BMA">
-        <activity android:name=".Homepage"></activity>
+        <activity
+            android:name=".ProductListActivity"
+            android:exported="true"></activity>
+
         <activity android:name=".AdminLogin" />
         <activity android:name=".UserLogin">
             <intent-filter>
