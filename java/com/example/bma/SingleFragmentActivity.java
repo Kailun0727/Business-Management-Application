@@ -1,9 +1,11 @@
 package com.example.bma;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,22 +26,56 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
-//        mBottomNavigationView = findViewById(R.id.bottomNavigationView);
-//
-//        mBottomNavigationView.setOnItemSelectedListener((NavigationBarView.OnItemSelectedListener) this);
-//        mBottomNavigationView.setSelectedItemId(R.id.homepage);
+        ProductListFragment productListFragment = new ProductListFragment();
 
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-        if(fragment == null){
-            //create a fragment
-            fragment = createFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_container, fragment)
-                    .commit();
-        }
+        ProfileFragment profileFragment = new ProfileFragment();
+
+        mBottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,productListFragment).commit();
+
+        mBottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener(){
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.homepage:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,productListFragment).commit();
+                        return true;
+
+                    case R.id.menu:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,productListFragment).commit();
+                        return true;
+
+                    case R.id.person:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,profileFragment).commit();
+                        return true;
+                }
+                return false;
+            }
+        });
+
+
+        //Here working
+//        FragmentManager fm = getSupportFragmentManager();
+//        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+//        if(fragment == null){
+//            //create a fragment
+//            fragment = createFragment();
+//            fm.beginTransaction()
+//                    .add(R.id.fragment_container, fragment)
+//                    .commit();
+//        }
+
+
 
     }
+
+    public void clicked_add(View view) {
+        Intent i = new Intent(this,AddProductPage.class);
+        startActivity(i);
+    }
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

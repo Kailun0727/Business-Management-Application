@@ -9,10 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BMA">
+        <activity android:name=".AddProductPage" android:parentActivityName=".ProductListActivity"></activity>
+        <activity
+            android:name=".UpdateProduct"
+            android:parentActivityName=".ProductListActivity" />
         <activity
             android:name=".ProductListActivity"
-            android:exported="true"></activity>
-
+            android:exported="true" />
         <activity android:name=".AdminLogin" />
         <activity android:name=".UserLogin">
             <intent-filter>

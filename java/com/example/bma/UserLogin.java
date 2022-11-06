@@ -14,6 +14,8 @@ public class UserLogin extends AppCompatActivity {
 
     private User mUser;
     private ActivityUserLoginBinding mUserLoginBinding;
+    private DBHandler dbHandler;
+    private Admin mAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,8 @@ public class UserLogin extends AppCompatActivity {
         //create new User object
         mUser = new User();
 
+        dbHandler = new DBHandler(this);
+
         //set content view for user login page
         mUserLoginBinding = ActivityUserLoginBinding.inflate(getLayoutInflater());
         setContentView(mUserLoginBinding.getRoot());
@@ -29,6 +33,12 @@ public class UserLogin extends AppCompatActivity {
         // set the TextChange Listener for both username & password
         mUserLoginBinding.usernameEditText.addTextChangedListener(textWatcher);
         mUserLoginBinding.passwordEditText.addTextChangedListener(textWatcher);
+
+
+
+
+
+
 
         //redirect to admin login page
         mUserLoginBinding.redirectAdminLogin.setOnClickListener(new View.OnClickListener() {
