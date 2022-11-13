@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BMA">
-        <activity android:name=".AddProductPage" android:parentActivityName=".ProductListActivity"></activity>
+        <activity android:name=".AdminMenuFragment"></activity>
+        <activity android:name=".UserMenuFragment" />
+        <activity
+            android:name=".AddProductPage"
+            android:parentActivityName=".ProductListActivity" />
         <activity
             android:name=".UpdateProduct"
             android:parentActivityName=".ProductListActivity" />

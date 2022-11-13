@@ -1,6 +1,7 @@
 package com.example.bma;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +31,22 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
         ProfileFragment profileFragment = new ProfileFragment();
 
+        UserMenuFragment userMenuFragment = new UserMenuFragment();
+
+        AdminMenuFragment adminMenuFragment = new AdminMenuFragment();
+
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        // Retrieving the value using its keys the file name
+        // must be same in both saving and retrieving the data
+        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+        // The value will be default as empty string because for
+        // the very first time when the app is opened, there is nothing to show
+        String login = sh.getString("login","");
+
+
+
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,productListFragment).commit();
 
@@ -44,8 +60,17 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.menu:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,productListFragment).commit();
-                        return true;
+
+                        if (login == "user"){
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,userMenuFragment).commit();
+                            return true;
+
+                        }
+                        else if (login == "admin"){
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,adminMenuFragment).commit();
+                            return true;
+                        }
+
 
                     case R.id.person:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,profileFragment).commit();

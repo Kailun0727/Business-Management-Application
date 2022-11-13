@@ -56,10 +56,6 @@ public class UpdateProduct extends AppCompatActivity {
                     //use product id to update info
                     isSaved = db.updateProduct(String.valueOf(id),productName,productQuantity,productPrice);
 
-                    if (isSaved == true){
-                        Toast.makeText(UpdateProduct.this,"Update successfully!",Toast.LENGTH_SHORT).show();
-                    }
-
                     //after update the info, redirect user to product list page
                     Intent i = new Intent(UpdateProduct.this,ProductListActivity.class);
                     startActivity(i);
@@ -73,9 +69,7 @@ public class UpdateProduct extends AppCompatActivity {
                 if (!productName.isEmpty()){
                     //use product id to update info
                     isSaved = db.updateProductName(String.valueOf(id),productName);
-                    if (isSaved == true){
-                        Toast.makeText(UpdateProduct.this,"Update successfully!",Toast.LENGTH_SHORT).show();
-                    }
+
                     //after update the info, redirect user to product list page
                     Intent i = new Intent(UpdateProduct.this,ProductListActivity.class);
                     startActivity(i);
@@ -85,9 +79,7 @@ public class UpdateProduct extends AppCompatActivity {
                 if (!productQuantity.isEmpty()){
                     //use product id to update info
                     isSaved = db.updateProductQuantity(String.valueOf(id),Integer.valueOf(productQuantity));
-                    if (isSaved == true){
-                        Toast.makeText(UpdateProduct.this,"Update successfully!",Toast.LENGTH_SHORT).show();
-                    }
+
                     //after update the info, redirect user to product list page
                     Intent i = new Intent(UpdateProduct.this,ProductListActivity.class);
                     startActivity(i);
@@ -97,12 +89,14 @@ public class UpdateProduct extends AppCompatActivity {
                 if (!productPrice.isEmpty()){
                     //use product id to update info
                     isSaved = db.updateProductPrice(String.valueOf(id),Integer.valueOf(productPrice));
-                    if (isSaved == true){
-                        Toast.makeText(UpdateProduct.this,"Update successfully!",Toast.LENGTH_SHORT).show();
-                    }
+
                     //after update the info, redirect user to product list page
                     Intent i = new Intent(UpdateProduct.this,ProductListActivity.class);
                     startActivity(i);
+                }
+
+                if (isSaved == true){
+                    Toast.makeText(UpdateProduct.this,"Update successfully!",Toast.LENGTH_SHORT).show();
                 }
 
             }

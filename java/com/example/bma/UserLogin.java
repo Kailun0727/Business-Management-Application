@@ -3,6 +3,7 @@ package com.example.bma;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -55,6 +56,21 @@ public class UserLogin extends AppCompatActivity {
         mUserLoginBinding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Storing data into SharedPreferences
+                SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+                // Creating an Editor object to edit(write to the file)
+                SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+                // Storing the key and its value as the data fetched from edittext
+                myEdit.putString("login", "user");
+
+                // Once the changes have been made,
+                // we need to commit to apply those changes made,
+                // otherwise, it will throw an error
+                myEdit.commit();
+
 
                 Intent i = new Intent(UserLogin.this, ProductListActivity.class);
                 startActivity(i);
