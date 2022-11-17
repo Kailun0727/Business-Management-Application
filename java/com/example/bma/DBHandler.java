@@ -62,6 +62,8 @@ public class DBHandler extends SQLiteOpenHelper {
     //S = Sales
     private static final String S_ID_COL = "id";
 
+    private static final String S_DATE_COL = "date";
+
     private static final String S_TOTAL_COL = "total";
 
 
@@ -77,8 +79,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("create Table User(id INTEGER primary key ,name TEXT, password TEXT)");
         db.execSQL("create Table Admin(id INTEGER primary key,name TEXT, password TEXT)");
         db.execSQL("create Table Product(id INTEGER primary key,productName TEXT, productQuantity TEXT, productPrice TEXT)");
-        db.execSQL("create Table Sales(id INTEGER primary key, total INTEGER)");
-
+        db.execSQL("create Table Sales(id INTEGER primary key, date TEXT, total INTEGER)");
     }
 
     @Override
@@ -128,17 +129,102 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // on below line we are creating a cursor with query to read data from database.
         Cursor c = db.rawQuery("SELECT * FROM User WHERE name = ? AND password =?", new String[]{username,password});
-//        User u = new User();
-
-//        if(c.getCount()>0){
-//            c.moveToFirst();
-//            u.setId(c.getInt(c.getColumnIndex(U_ID_COL)));
-//            u.setUsername(c.getString(c.getColumnIndex(U_NAME_COL)));
-//            u.setPassword(c.getString(c.getColumnIndex(U_PASSWORD_COL)));
-//
-//        }
 
         return c;
+    }
+
+    boolean updateUserName(String id,String name){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(U_NAME_COL, name);
+
+        long result = db.update(USER_TABLE,values,"id=?",new String[]{id});
+
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    boolean updateUserPassword(String id,String password){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(U_PASSWORD_COL, password);
+
+        long result = db.update(USER_TABLE,values,"id=?",new String[]{id});
+
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    //Handle profit data
+    public boolean addSales(String date,int total){
+
+        // on below line we are creating a variable for
+        // our sqlite database and calling writable method
+        // as we are writing data in our database.
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // on below line we are creating a
+        // variable for content values.
+        ContentValues values = new ContentValues();
+
+        // on below line we are passing all values
+        // along with its key and value pair.
+        values.put(S_DATE_COL, date);
+        values.put(S_TOTAL_COL, total);
+
+        // after adding all values we are passing
+        // content values to our table.
+        long result = db.insert(SALES_TABLE, null, values);
+
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public Cursor readAllSales(){
+        // on below line we are creating a
+        // database for reading our database.
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // on below line we are creating a cursor with query to read data from database.
+        Cursor c = db.rawQuery("SELECT * FROM Sales order by date ASC", null);
+
+        return c;
+    }
+
+    boolean updateSalesTotal(String id,int total){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(S_TOTAL_COL, total);
+
+        long result = db.update(SALES_TABLE,values,"id=?",new String[]{id});
+
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     //Handle admin data
@@ -325,5 +411,7 @@ public class DBHandler extends SQLiteOpenHelper {
             return true;
         }
     }
+
+
 
 }
