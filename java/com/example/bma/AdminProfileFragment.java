@@ -1,30 +1,27 @@
 package com.example.bma;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.bma.databinding.FragmentProductBinding;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.bma.databinding.FragmentAdminProfileBinding;
 import com.example.bma.databinding.FragmentProfileBinding;
 
-public class ProfileFragment extends Fragment {
+public class AdminProfileFragment extends Fragment {
 
-    private FragmentProfileBinding profileBinding;
+    private FragmentAdminProfileBinding mFragmentAdminProfileBinding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        profileBinding = FragmentProfileBinding.inflate(getLayoutInflater());
-        return profileBinding.getRoot();
+        mFragmentAdminProfileBinding = FragmentAdminProfileBinding.inflate(getLayoutInflater());
+        return mFragmentAdminProfileBinding.getRoot();
 
     }
 
@@ -33,7 +30,7 @@ public class ProfileFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        profileBinding.addProduct.setOnClickListener(new View.OnClickListener() {
+        mFragmentAdminProfileBinding.addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             }
