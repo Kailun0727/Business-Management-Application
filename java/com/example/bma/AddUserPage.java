@@ -28,6 +28,7 @@ public class AddUserPage extends AppCompatActivity {
         db = new DBHandler(this);
 
         //add text watcher to edit text
+        mAddUserPageBinding.fullNameEditText.addTextChangedListener(textWatcher);
         mAddUserPageBinding.nameEditText.addTextChangedListener(textWatcher);
         mAddUserPageBinding.passwordEditText.addTextChangedListener(textWatcher);
 
@@ -35,11 +36,12 @@ public class AddUserPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //get input from edit text
+                String fullName = mAddUserPageBinding.fullNameEditText.getText().toString();
                 String name = mAddUserPageBinding.nameEditText.getText().toString();
                 String ps= mAddUserPageBinding.passwordEditText.getText().toString();
 
                 //add the user into database
-                boolean addUser = db.addUser(name,ps);
+                boolean addUser = db.addUser(fullName,name,ps);
 
                 if(addUser == true){
                     Toast.makeText(AddUserPage.this,"User has been added!",Toast.LENGTH_SHORT).show();
@@ -61,10 +63,11 @@ public class AddUserPage extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            String fullName = mAddUserPageBinding.fullNameEditText.getText().toString();
             String name = mAddUserPageBinding.nameEditText.getText().toString();
             String ps= mAddUserPageBinding.passwordEditText.getText().toString();
             //if all field is not empty , then set the button to enabled
-            if (!name.isEmpty() && !ps.isEmpty()){
+            if (!fullName.isEmpty() && !name.isEmpty() && !ps.isEmpty()){
                 mAddUserPageBinding.btnSave.setEnabled(true);
             }
 

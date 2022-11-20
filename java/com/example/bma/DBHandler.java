@@ -32,7 +32,10 @@ public class DBHandler extends SQLiteOpenHelper {
     // below variable is for our id column.
     private static final String U_ID_COL = "id";
 
-    // below variable is for our course name column
+    // below variable is for our full name column
+    private static final String U_FULLNAME_COL = "name";
+
+    // below variable is for our  name column
     private static final String U_NAME_COL = "name";
 
     // below variable is for our  password column
@@ -77,7 +80,7 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create Table User(id INTEGER primary key ,name TEXT, password TEXT)");
-        db.execSQL("create Table Admin(id INTEGER primary key,name TEXT, password TEXT)");
+        db.execSQL("create Table Admin(id INTEGER primary key,fullName TEXT, name TEXT, password TEXT)");
         db.execSQL("create Table Product(id INTEGER primary key,productName TEXT, productQuantity TEXT, productPrice TEXT)");
         db.execSQL("create Table Sales(id INTEGER primary key, date TEXT, total INTEGER)");
     }
@@ -93,7 +96,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //Handle user data
-    public boolean addUser(String username,String password){
+    public boolean addUser(String fullName,String username,String password){
 
         // on below line we are creating a variable for
         // our sqlite database and calling writable method
@@ -106,6 +109,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // on below line we are passing all values
         // along with its key and value pair.
+        values.put(U_FULLNAME_COL,fullName);
         values.put(U_NAME_COL, username);
         values.put(U_PASSWORD_COL, password);
 
@@ -131,6 +135,24 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor c = db.rawQuery("SELECT * FROM User WHERE name = ? AND password =?", new String[]{username,password});
 
         return c;
+    }
+
+    boolean updateFullName(String id,String fullName){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(U_FULLNAME_COL, fullName);
+
+        long result = db.update(USER_TABLE,values,"id=?",new String[]{id});
+
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     boolean updateUserName(String id,String name){
