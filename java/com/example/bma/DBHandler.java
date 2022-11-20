@@ -137,6 +137,31 @@ public class DBHandler extends SQLiteOpenHelper {
         return c;
     }
 
+    boolean updateUser(String id,String fullName, String name, String password){
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(U_FULLNAME_COL, fullName);
+        values.put(U_NAME_COL, name);
+        values.put(U_PASSWORD_COL, password);
+
+
+        long result = db.update(PRODUCT_TABLE,values,"id=?",new String[]{id});
+
+
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+
+
+    }
+
     boolean updateFullName(String id,String fullName){
 
         SQLiteDatabase db = this.getWritableDatabase();
