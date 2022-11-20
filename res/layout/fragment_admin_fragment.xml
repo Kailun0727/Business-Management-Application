@@ -35,6 +35,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:text="View Profit"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -71,6 +72,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:text="Add New User"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -106,6 +108,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:text="View All Users"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
