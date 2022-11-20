@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".UserEditProfile"
     android:background="@drawable/gradient"
-    tools:context=".UpdateProduct">
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/updatePage"
+        android:id="@+id/updateUserPage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="40dp"
@@ -20,11 +21,11 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="100dp"
             android:textStyle="bold"
             android:textSize="40sp"
             android:layout_centerHorizontal="true"
-            android:text="Add Product" />
+            android:text="Update Profile" />
 
 
         <LinearLayout
@@ -35,10 +36,10 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nameEditText"
+                android:id="@+id/fullNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Product Name :"
+                android:hint="Enter Full Name :"
                 android:singleLine="true"
                 android:layout_marginTop="25dp"
                 android:textColor="@color/black"
@@ -46,51 +47,53 @@
                 android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/quantityEditText"
+                android:id="@+id/usernameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:hint="Enter Product Price :"
-                android:inputType="number"
+                android:hint="Enter New Username :"
                 android:maxLines="1"
+                android:inputType="number"
                 android:textColor="@color/black"
                 android:textColorHint="@color/colorAccent"
                 android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/priceEditText"
+                android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:hint="Enter Product Quantity :"
+                android:hint="Enter New Password :"
                 android:inputType="number"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="@color/colorAccent"
                 android:textSize="15sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnUpdate"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Save"
-                android:enabled="false"
-                android:layout_marginTop="20dp"
-                android:background="@color/colorBackground"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBackground"
+                    android:textColor="@color/white"
+                    android:text="Save"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/btnDelete"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 
 
     </RelativeLayout>
 
-
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

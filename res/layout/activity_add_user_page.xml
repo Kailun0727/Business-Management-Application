@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".AddUserPage">
 
     <RelativeLayout
@@ -75,9 +76,9 @@
                 android:enabled="false"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@color/grey"
-                android:text="Save"
-                android:textColor="@color/black" />
+                android:background="@color/colorBackground"
+                android:textColor="@color/white"
+                android:text="Save" />
 
 
         </LinearLayout>

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UpdateProduct">
+    tools:context=".UpdateProduct"
+    android:background="@drawable/gradient">
+
     <RelativeLayout
         android:id="@+id/updatePage"
         android:layout_width="match_parent"
@@ -91,8 +93,8 @@
                     android:text="Save"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:textColor="@color/black"
-                    android:background="@color/grey"
+                    android:background="@color/colorBackground"
+                    android:textColor="@color/white"
                     android:layout_toRightOf="@+id/btnDelete"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
