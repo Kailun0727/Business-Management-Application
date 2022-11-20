@@ -8,10 +8,21 @@ public class User {
     }
 
     private int id;
+    private String fullName;
     private String username;
     private String password;
 
     public User() {
+    }
+
+    public String getFullName() {
+
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+
+        this.fullName = fullName;
     }
 
     public String getUsername() {

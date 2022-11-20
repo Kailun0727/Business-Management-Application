@@ -137,6 +137,20 @@ public class DBHandler extends SQLiteOpenHelper {
         return c;
     }
 
+    boolean deleteUser(String id){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long result = db.delete(USER_TABLE,"id=?",new String[]{id});
+
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     boolean updateUser(String id,String fullName, String name, String password){
 
 
