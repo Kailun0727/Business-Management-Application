@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".UserMenuFragment">
+    tools:context=".AdminMenuFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="20dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
         app:cardMaxElevation="12dp"
@@ -34,8 +34,8 @@
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:text="View Profit"
             android:textColor="@color/black"
+            android:text="View Profit"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/community"
+        android:id="@+id/add_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/home"
@@ -63,7 +63,7 @@
             android:layout_marginBottom="20dp"
 
             android:contentDescription="@string/app_name"
-            android:src="@drawable/add_sales" />
+            android:src="@drawable/add_user" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,8 +71,44 @@
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="Add Sales"
             android:textColor="@color/black"
+            android:text="Add New User"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/view_profit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_user"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+            android:id="@+id/img3"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/view_all_user" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            android:text="View All Users"
             android:textSize="24sp"
             android:textStyle="bold" />
 

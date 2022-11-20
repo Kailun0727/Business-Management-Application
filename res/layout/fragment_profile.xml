@@ -89,6 +89,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="sans-serif-medium"
                         android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
                         android:text="User List"
                         android:textAlignment="center" />
 
@@ -125,6 +126,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="sans-serif-medium"
                         android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
                         android:text="Logout"
                         android:textAlignment="center" />
 
