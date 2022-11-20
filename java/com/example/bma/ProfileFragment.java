@@ -36,6 +36,28 @@ public class ProfileFragment extends Fragment {
         profileBinding.addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent i = new Intent(getActivity(), AddProductPage.class);
+                startActivity(i);
+
+            }
+        });
+
+        profileBinding.addSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
+
+        profileBinding.editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(getActivity(), UserEditProfile.class);
+                startActivity(i);
+
             }
         });
     }

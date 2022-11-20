@@ -1,5 +1,6 @@
 package com.example.bma;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,30 @@ public class AdminProfileFragment extends Fragment {
         mFragmentAdminProfileBinding.addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent i = new Intent(getActivity(), AddProductPage.class);
+                startActivity(i);
+
+            }
+        });
+
+        mFragmentAdminProfileBinding.addUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(getActivity(), AddUserPage.class);
+                startActivity(i);
+
+            }
+        });
+
+        mFragmentAdminProfileBinding.logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(getActivity(), UserLogin.class);
+                startActivity(i);
+
             }
         });
     }

@@ -61,11 +61,11 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                 login = sh.getString("login","");
 
                 switch (item.getItemId()){
-                    case R.id.homepage:
+                    case R.id.product:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,productListFragment).commit();
                         return true;
 
-                    case R.id.menu:
+                    case R.id.sales:
                         String menu_code = login.toString();
                         if (menu_code.equalsIgnoreCase("user")){
                             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,userMenuFragment).commit();
@@ -79,8 +79,11 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                             return true;
                         }
 
-                    case R.id.person:
+                    case R.id.user:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,profileFragment).commit();
+                        return true;
+
+                    case R.id.profile:
                         return true;
                 }
                 return false;
