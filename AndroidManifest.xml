@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BMA">
-        <activity android:name=".AddUserPage"/>
-        <activity android:name=".UpdateUser"
-            android:parentActivityName=".UserListActivity"/>
+        <activity android:name=".UserEditProfile"
+            android:parentActivityName=".ProductListActivity"></activity>
+        <activity android:name=".AddUserPage" />
+        <activity
+            android:name=".UpdateUser"
+            android:parentActivityName=".UserListActivity" />
         <activity
             android:name=".AddProductPage"
             android:parentActivityName=".ProductListActivity" />
