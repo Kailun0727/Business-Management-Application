@@ -53,7 +53,6 @@
                 android:layout_marginTop="25dp"
                 android:hint="Enter New Username :"
                 android:maxLines="1"
-                android:inputType="number"
                 android:textColor="@color/black"
                 android:textColorHint="@color/colorAccent"
                 android:textSize="15sp" />
@@ -64,7 +63,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:hint="Enter New Password :"
-                android:inputType="number"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="@color/colorAccent"

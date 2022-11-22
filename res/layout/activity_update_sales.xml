@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".UpdateUser">
+    tools:context=".UpdateSales">
 
     <RelativeLayout
         android:id="@+id/updateUserPage"
@@ -16,15 +16,17 @@
 
         android:orientation="vertical">
 
+
+
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="100dp"
             android:textStyle="bold"
             android:textSize="40sp"
             android:layout_centerHorizontal="true"
-            android:text="Update User" />
+            android:text="Update Sales" />
 
 
         <LinearLayout
@@ -33,37 +35,21 @@
             android:gravity="center"
             android:orientation="vertical">
 
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fullNameEditText"
-                android:layout_width="match_parent"
+            <DatePicker
+                android:id="@+id/simpleDatePicker"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Enter New User Full Name :"
-                android:singleLine="true"
-                android:layout_marginTop="25dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="15sp" />
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
+                />
+
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/usernameEditText"
+                android:id="@+id/totalEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:hint="Enter New Username :"
-                android:maxLines="1"
-
-                android:textColor="@color/black"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="15sp" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:hint="Enter New Password :"
-
+                android:hint="Enter New Total Profit :"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="@color/colorAccent"
@@ -74,26 +60,12 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnDelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Delete"
-                    android:background="#ff0000"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnUpdate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorBackground"
                     android:textColor="@color/white"
                     android:text="Save"
-                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_toRightOf="@+id/btnDelete"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -108,7 +80,4 @@
 
 
     </RelativeLayout>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
