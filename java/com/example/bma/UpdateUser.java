@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class UpdateUser extends AppCompatActivity {
         Intent i = getIntent();
         int id = i.getIntExtra("id",0);
 
+        Log.d("debug",String.valueOf(id));
+
         mBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,13 +51,12 @@ public class UpdateUser extends AppCompatActivity {
                     //use user id to update info
                     isSaved = db.updateUser(String.valueOf(id), userFullName, userUsername, userPassword);
 
-                    //after update the info, redirect admin to user list page
-                    Intent i = new Intent(UpdateUser.this, UserListActivity.class);
-                    startActivity(i);
+                    Toast.makeText(UpdateUser.this,"User updated successfully!",Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(UpdateUser.this, UserListActivity.class);
+                    startActivity(intent);
                 }
-                else {
-                    Toast.makeText(UpdateUser.this,"Please enter something to continue!",Toast.LENGTH_SHORT).show();
-                }
+
 
 
                 //if admin only enter user full name
@@ -62,9 +64,9 @@ public class UpdateUser extends AppCompatActivity {
                     //use user id to update info
                     isSaved = db.updateFullName(String.valueOf(id), userFullName);
 
-                    //after update the info, redirect admin to user list page
-                    Intent i = new Intent(UpdateUser.this, UserListActivity.class);
-                    startActivity(i);
+                    Toast.makeText(UpdateUser.this,"Full name updated successfully!",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(UpdateUser.this, UserListActivity.class);
+                    startActivity(intent);
                 }
 
                 //if admin only enter user username
@@ -72,9 +74,9 @@ public class UpdateUser extends AppCompatActivity {
                     //use user id to update info
                     isSaved = db.updateUserName(String.valueOf(id), userUsername);
 
-                    //after update the info, redirect admin to user list page
-                    Intent i = new Intent(UpdateUser.this, UserListActivity.class);
-                    startActivity(i);
+                    Toast.makeText(UpdateUser.this,"Username updated successfully!",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(UpdateUser.this, UserListActivity.class);
+                    startActivity(intent);
                 }
 
                 //if admin only enter user password
@@ -82,13 +84,15 @@ public class UpdateUser extends AppCompatActivity {
                     //use user id to update info
                     isSaved = db.updateUserPassword(String.valueOf(id), userPassword);
 
-                    //after update the info, redirect admin to user list page
-                    Intent i = new Intent(UpdateUser.this, UserListActivity.class);
-                    startActivity(i);
+                    Toast.makeText(UpdateUser.this,"User password updated successfully!",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(UpdateUser.this, UserListActivity.class);
+                    startActivity(intent);
                 }
 
                 if (isSaved == true){
                     Toast.makeText(UpdateUser.this,"Update successfully!",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(UpdateUser.this,"Please enter something to continue!",Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -99,6 +103,9 @@ public class UpdateUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                //get intent data from previous activity
+                Intent i = getIntent();
+                int id = i.getIntExtra("id",0);
 
                 // Create the object of AlertDialog Builder class
                 AlertDialog.Builder builder = new AlertDialog.Builder(UpdateUser.this);
@@ -120,8 +127,8 @@ public class UpdateUser extends AppCompatActivity {
                     if(isDelete == true){
                         Toast.makeText(UpdateUser.this,"Delete successfully!", Toast.LENGTH_SHORT).show();
                         //after delete the user, redirect admin to user list page
-                        Intent i = new Intent(UpdateUser.this, UserListActivity.class);
-                        startActivity(i);
+                        Intent intent = new Intent(UpdateUser.this, UserListActivity.class);
+                        startActivity(intent);
                     }
                     else{
                         Toast.makeText(UpdateUser.this,"Delete unsuccessfully", Toast.LENGTH_SHORT).show();

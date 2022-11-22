@@ -1,6 +1,8 @@
 package com.example.bma;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,13 @@ public class AdminProfileFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
+        //get data from shared preference
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("MySharedPref",  Context.MODE_PRIVATE);
+        String name = prefs.getString("name", null);
+
+
+        mFragmentAdminProfileBinding.name.setText(name);
+
         mFragmentAdminProfileBinding.addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +57,14 @@ public class AdminProfileFragment extends Fragment {
                 Intent i = new Intent(getActivity(), AddUserPage.class);
                 startActivity(i);
 
+            }
+        });
+
+        mFragmentAdminProfileBinding.addSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), AddSales.class);
+                startActivity(i);
             }
         });
 

@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.bma.databinding.ActivityUserLoginBinding;
 
@@ -46,6 +48,7 @@ public class UserLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
                 Intent i = new Intent(UserLogin.this, AdminLogin.class);
                 startActivity(i);
 
@@ -57,23 +60,44 @@ public class UserLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // Storing data into SharedPreferences
-                SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
 
-                // Creating an Editor object to edit(write to the file)
-                SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                //check the database
+                String name = mUserLoginBinding.usernameEditText.getText().toString();
+                String ps = mUserLoginBinding.passwordEditText.getText().toString();
 
-                // Storing the key and its value as the data fetched from edittext
-                myEdit.putString("login", "user");
+                //Read user part
+                Cursor c = dbHandler.readUser(name, ps);
 
-                // Once the changes have been made,
-                // we need to commit to apply those changes made,
-                // otherwise, it will throw an error
-                myEdit.commit();
+                if (c.getCount() >= 1) {
+
+                    while (c.moveToNext()){
+                        // Storing data into SharedPreferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+                        // Creating an Editor object to edit(write to the file)
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+                        String id = String.valueOf(c.getInt(0));
+                        // Storing the key and its value as the data fetched from edittext
+                        myEdit.putString("login", "user");
+                        myEdit.putString("id",id);
+                        myEdit.putString("name",name);
+
+                        // Once the changes have been made,
+                        // we need to commit to apply those changes made,
+                        // otherwise, it will throw an error
+                        myEdit.commit();
+                    }
 
 
-                Intent i = new Intent(UserLogin.this, ProductListActivity.class);
-                startActivity(i);
+                    Intent i = new Intent(UserLogin.this, ProductListActivity.class);
+                    startActivity(i);
+                }
+                else {
+                    Toast.makeText(UserLogin.this, "The username or password is wrong, Please try again", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

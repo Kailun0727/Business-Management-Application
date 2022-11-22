@@ -65,15 +65,6 @@ public class ProductListFragment extends Fragment {
         mProductList = new ArrayList<>();
 
 
-        //insert dummy data for testing
-
-            Product testProduct = new Product();
-            testProduct.setProductName("Product # 1");
-            testProduct.setProductQuantity(1);
-            testProduct.setProductPrice(1);
-            boolean add = db.addProduct(testProduct);
-
-
         //Use cursor to store all product
         Cursor c = db.readAllProduct();
 
@@ -153,8 +144,8 @@ public class ProductListFragment extends Fragment {
 
             mProduct = product;
             mProductName.setText(mProduct.getProductName());
-            mProductQuantity.setText(String.valueOf(mProduct.getProductQuantity()));
-            mProductPrice.setText(String.valueOf(mProduct.getProductPrice()));
+            mProductQuantity.setText("Quantity :"+String.valueOf(mProduct.getProductQuantity()));
+            mProductPrice.setText("RM"+String.valueOf(mProduct.getProductPrice()));
 
             mBtnEdit.setOnClickListener(new View.OnClickListener() {
                 @Override

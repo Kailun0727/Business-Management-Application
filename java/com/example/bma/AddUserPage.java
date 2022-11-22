@@ -45,6 +45,8 @@ public class AddUserPage extends AppCompatActivity {
 
                 if(addUser == true){
                     Toast.makeText(AddUserPage.this,"User has been added!",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(AddUserPage.this, UserListActivity.class);
+                    startActivity(i);
                 }
                 else{
                     Toast.makeText(AddUserPage.this,"Please try again!",Toast.LENGTH_SHORT).show();

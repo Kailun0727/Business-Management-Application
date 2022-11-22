@@ -23,6 +23,8 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
     private BottomNavigationView mBottomNavigationView;
+
+
     private String login;
 
     @Override
@@ -38,7 +40,15 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
         AdminMenuFragment adminMenuFragment = new AdminMenuFragment();
 
+        SalesListFragment salesListFragment = new SalesListFragment();
+
+        UserListFragment userListFragment = new UserListFragment();
+
+        AdminProfileFragment adminProfileFragment = new AdminProfileFragment();
+
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+
 
         // Retrieving the value using its keys the file name
         // must be same in both saving and retrieving the data
@@ -55,6 +65,9 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+                String menu_code = login.toString();
+
+
 
                 // The value will be default as empty string because for
                 // the very first time when the app is opened, there is nothing to show
@@ -66,25 +79,35 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.sales:
-                        String menu_code = login.toString();
-                        if (menu_code.equalsIgnoreCase("user")){
-                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,userMenuFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,salesListFragment).commit();
+                        return true;
+
+                    case R.id.user:
+
+                        if(menu_code.equalsIgnoreCase("user")){
+                            item.setEnabled(false);
                             return true;
                         }
                         else if (menu_code.equalsIgnoreCase("admin")){
-                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,adminMenuFragment).commit();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, userListFragment).commit();
                             return true;
                         }else {
-                            Log.d("MyApp2",login);
+                            item.setEnabled(false);
                             return true;
                         }
 
-                    case R.id.user:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,profileFragment).commit();
-                        return true;
-
                     case R.id.profile:
-                        return true;
+
+                        if (menu_code.equalsIgnoreCase("user")){
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,profileFragment).commit();
+                            return true;
+                        }
+                        else if (menu_code.equalsIgnoreCase("admin")){
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,adminProfileFragment).commit();
+                            return true;
+                        }else {
+                            return true;
+                        }
                 }
                 return false;
             }
@@ -105,6 +128,21 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
 
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        //get intent data from previous activity
+//        SharedPreferences prefs = this.getSharedPreferences("MySharedPref", MODE_PRIVATE);
+//        String login = prefs.getString("login", null);
+//
+//        MenuItem item = menu.findItem(R.id.user);
+//
+//        if (login.equalsIgnoreCase("user")){
+//            item.setEnabled(false);
+//        }
+//        return true;
+//
+//    }
 
     public void clicked_add(View view) {
         Intent i = new Intent(this,AddProductPage.class);

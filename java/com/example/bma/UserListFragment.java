@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,7 @@ public class UserListFragment extends Fragment {
         mUserList = new ArrayList<>();
 
         //Use cursor to store all product
-        Cursor c = db.readAllProduct();
+        Cursor c = db.readAllUser();
 
         if(c.getCount() == 0 ){
             Toast.makeText(getActivity(),"No data.",Toast.LENGTH_SHORT).show();
@@ -68,8 +69,10 @@ public class UserListFragment extends Fragment {
                 User user = new User();
 
                 //after create the product object, save it into array list
-                user.setUsername(c.getString(1));
-                user.setPassword(c.getString(2));
+                user.setId(c.getInt(0));
+                user.setFullName(c.getString(1));
+                user.setUsername(c.getString(2));
+                user.setPassword(c.getString(3));
                 mUserList.add(user);
             }
         }
@@ -120,6 +123,7 @@ public class UserListFragment extends Fragment {
     private class UserHolder extends RecyclerView.ViewHolder{
 
         private User mUser;
+
         private TextView mUserFullName;
         private TextView mUserUsername;
         private TextView mUserPassword;
@@ -129,14 +133,14 @@ public class UserListFragment extends Fragment {
         public void bindUser(User user){
 
             mUser = user;
-            mUserFullName.setText(mUser.getFullName());
-            mUserUsername.setText(mUser.getUsername());
-            mUserPassword.setText(mUser.getPassword());
+
+            mUserFullName.setText("Full Name: "+mUser.getFullName());
+            mUserUsername.setText("Username: "+mUser.getUsername());
+            mUserPassword.setText("Password: "+mUser.getPassword());
 
             mBtnEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    System.out.println(String.valueOf(mUser.getId()));
 
                     Intent i = new Intent(getActivity(), UpdateUser.class);
                     i.putExtra("id", mUser.getId());

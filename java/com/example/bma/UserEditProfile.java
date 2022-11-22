@@ -2,7 +2,9 @@ package com.example.bma;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -26,9 +28,9 @@ public class UserEditProfile extends AppCompatActivity {
 
         db = new DBHandler(this);
 
-        //get intent data from previous activity
-        Intent i = getIntent();
-        int id = i.getIntExtra("id",0);
+        //get data from shared preference
+        SharedPreferences prefs = this.getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        String id = prefs.getString("id", null);
 
         mBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,14 +44,12 @@ public class UserEditProfile extends AppCompatActivity {
                 //Update user info
                 if (!userFullName.isEmpty() && !userUsername.isEmpty() && !userPassword.isEmpty()){
                     //use user id to update info
-                    isSaved = db.updateUser(String.valueOf(id), userFullName, userUsername, userPassword);
+                    isSaved = db.updateUser(id, userFullName, userUsername, userPassword);
 
                     //after update the info, redirect admin to user list page
                     Toast.makeText(UserEditProfile.this, "Profile successfully updated!", Toast.LENGTH_SHORT).show();
                 }
-                else {
-                    Toast.makeText(UserEditProfile.this,"Please enter something to continue!",Toast.LENGTH_SHORT).show();
-                }
+
 
 
                 //if admin only enter user full name
@@ -78,6 +78,8 @@ public class UserEditProfile extends AppCompatActivity {
 
                 if (isSaved == true){
                     Toast.makeText(UserEditProfile.this,"Update successfully!",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(UserEditProfile.this,"Please enter something to continue!",Toast.LENGTH_SHORT).show();
                 }
 
             }

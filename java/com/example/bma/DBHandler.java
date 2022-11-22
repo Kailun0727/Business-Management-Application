@@ -33,7 +33,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String U_ID_COL = "id";
 
     // below variable is for our full name column
-    private static final String U_FULLNAME_COL = "name";
+    private static final String U_FULLNAME_COL = "fullName";
 
     // below variable is for our  name column
     private static final String U_NAME_COL = "name";
@@ -79,8 +79,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create Table User(id INTEGER primary key ,name TEXT, password TEXT)");
-        db.execSQL("create Table Admin(id INTEGER primary key,fullName TEXT, name TEXT, password TEXT)");
+        db.execSQL("create Table User(id INTEGER primary key ,fullName TEXT,name TEXT, password TEXT)");
+        db.execSQL("create Table Admin(id INTEGER primary key, name TEXT, password TEXT)");
         db.execSQL("create Table Product(id INTEGER primary key,productName TEXT, productQuantity TEXT, productPrice TEXT)");
         db.execSQL("create Table Sales(id INTEGER primary key, date TEXT, total INTEGER)");
     }
@@ -125,6 +125,16 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
+    public Cursor readAllUser(){
+        // on below line we are creating a
+        // database for reading our database.
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // on below line we are creating a cursor with query to read data from database.
+        Cursor c = db.rawQuery("SELECT * FROM User", null);
+
+        return c;
+    }
 
     public Cursor readUser(String username, String password){
         // on below line we are creating a
@@ -163,7 +173,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(U_PASSWORD_COL, password);
 
 
-        long result = db.update(PRODUCT_TABLE,values,"id=?",new String[]{id});
+        long result = db.update(USER_TABLE,values,"id=?",new String[]{id});
 
 
         if(result == -1){
@@ -265,9 +275,28 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // on below line we are creating a cursor with query to read data from database.
-        Cursor c = db.rawQuery("SELECT * FROM Sales order by date ASC", null);
+        Cursor c = db.rawQuery("SELECT * FROM Sales", null);
 
         return c;
+    }
+
+    boolean updateSales(String id,String date,int total){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(S_DATE_COL, date);
+        values.put(S_TOTAL_COL,total);
+
+        long result = db.update(SALES_TABLE,values,"id=?",new String[]{id});
+
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     boolean updateSalesTotal(String id,int total){
@@ -277,6 +306,24 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(S_TOTAL_COL, total);
+
+        long result = db.update(SALES_TABLE,values,"id=?",new String[]{id});
+
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    boolean updateSalesDate(String id,String date){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(S_DATE_COL, date);
 
         long result = db.update(SALES_TABLE,values,"id=?",new String[]{id});
 

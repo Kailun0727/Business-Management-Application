@@ -62,19 +62,7 @@ public class AdminLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // Storing data into SharedPreferences
-                SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
 
-                // Creating an Editor object to edit(write to the file)
-                SharedPreferences.Editor myEdit = sharedPreferences.edit();
-
-                // Storing the key and its value as the data fetched from edittext
-                myEdit.putString("login", "admin");
-
-                // Once the changes have been made,
-                // we need to commit to apply those changes made,
-                // otherwise, it will throw an error
-                myEdit.commit();
 
                 String name = mAdminLoginBinding.usernameEditText.getText().toString();
                 String ps = mAdminLoginBinding.passwordEditText.getText().toString();
@@ -83,6 +71,26 @@ public class AdminLogin extends AppCompatActivity {
                 Cursor c = dbHandler.readAdmin(name, ps);
 
                 if (c.getCount() >= 1) {
+                    while (c.moveToNext()) {
+                        String id = String.valueOf(c.getInt(0));
+
+                        // Storing data into SharedPreferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+                        // Creating an Editor object to edit(write to the file)
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+                        // Storing the key and its value as the data fetched from edittext
+                        myEdit.putString("login", "admin");
+                        myEdit.putString("id", id);
+                        myEdit.putString("name",name);
+
+                        // Once the changes have been made,
+                        // we need to commit to apply those changes made,
+                        // otherwise, it will throw an error
+                        myEdit.commit();
+                    }
+
                     Intent i = new Intent(AdminLogin.this, ProductListActivity.class);
                     startActivity(i);
                 }
